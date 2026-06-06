@@ -11,10 +11,18 @@ use Illuminate\Support\Facades\Auth;
 class WatchlistController extends Controller
 {
     public function index()
-    {
-        $watchlist = Auth::user()->watchlist()->with('movie')->get();
-        return view('watchlist.index', compact('watchlist'));
+{
+    $watchlist = Auth::user()->watchlist()->with('movie')->get();
+    
+    $tmdb = new \App\Services\TmdbService();
+    
+    foreach ($watchlist as $item) {
+        $movieData = $tmdb->getMovie($item->movie->tmdb_movie_id);
+        $item->poster = $movieData['poster_path'] ?? null;
     }
+    
+    return view('watchlist.index', compact('watchlist'));
+}
 
     public function store(Request $request)
     {
