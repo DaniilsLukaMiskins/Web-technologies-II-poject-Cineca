@@ -43,7 +43,7 @@
     @foreach($friends as $friend)
     <div class="card mb-2">
         <div class="card-body d-flex justify-content-between align-items-center">
-            <span>{{ $friend->friendUser->username }}</span>
+            <span>{{ $friend->friend->username }}</span>
             <form action="{{ route('friends.destroy', $friend) }}" method="POST">
                 @csrf
                 @method('DELETE')
@@ -53,17 +53,17 @@
     </div>
     @endforeach
 
-    {{-- Adding friend --}}
-    <h2 class="mt-4 mb-3" style="color:#F0F465;">Add Friend</h2>
-    <div class="card">
-        <div class="card-body">
-            <form action="{{ route('friends.store') }}" method="POST" class="d-flex gap-2">
-                @csrf
-                <input type="number" name="friend_id" class="form-control"
-                       placeholder="Enter user ID">
-                <button class="btn btn-primary">Send Request</button>
-            </form>
-        </div>
+   {{-- Adding friend --}}
+<h2 class="mt-4 mb-3" style="color:#F0F465;">Add Friend</h2>
+<div class="card">
+    <div class="card-body">
+        <form action="{{ route('friends.store') }}" method="POST" class="d-flex gap-2">
+            @csrf
+            <input type="text" name="username" class="form-control"
+                   placeholder="Enter username">
+            <button class="btn btn-primary">Send Request</button>
+        </form>
     </div>
+</div>
 </div>
 @endsection

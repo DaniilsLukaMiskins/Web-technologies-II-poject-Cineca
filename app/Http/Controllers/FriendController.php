@@ -26,38 +26,43 @@ class FriendController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'friend_id' => 'required|exists:users,id',
-        ]);
+{
+    $request->validate([
+        'username' => 'required|exists:users,username',
+    ]);
 
+    $friend = \App\Models\User::where('username', $request->username)->first();
+
+    if ($friend->id === Auth::id()) {
+        return redirect()->back()->with('error', 'You cannot add yourself!');
+    }
+
+    Friend::firstOrCreate([
+        'user_id'   => Auth::id(),
+        'friend_id' => $friend->id,
+        'status'    => 'pending',
+    ]);
+
+    return redirect()->back()->with('success', 'Friend request sent!');
+}
+   public function update(Request $request, Friend $friend)
+{
+    $request->validate([
+        'status' => 'required|in:accepted,rejected',
+    ]);
+
+    $friend->update(['status' => $request->status]);
+
+    if ($request->status === 'accepted') {
         Friend::firstOrCreate([
-            'user_id'   => Auth::id(),
-            'friend_id' => $request->friend_id,
-            'status'    => 'pending',
+            'user_id'   => $friend->friend_id,
+            'friend_id' => $friend->user_id,
+            'status'    => 'accepted',
         ]);
-
-        AuditLog::create([
-            'user_id'     => Auth::id(),
-            'action'      => 'sent friend request',
-            'entity_type' => 'user',
-            'entity_id'   => $request->friend_id,
-            'created_at'  => now(),
-        ]);
-
-        return redirect()->back()->with('success', 'Friend request sent!');
     }
 
-    public function update(Request $request, Friend $friend)
-    {
-        $request->validate([
-            'status' => 'required|in:accepted,rejected',
-        ]);
-
-        $friend->update(['status' => $request->status]);
-
-        return redirect()->back()->with('success', 'Friend request updated!');
-    }
+    return redirect()->back()->with('success', 'Friend request updated!');
+}
 
     public function destroy(Friend $friend)
     {
