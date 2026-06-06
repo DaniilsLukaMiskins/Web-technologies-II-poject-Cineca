@@ -66,7 +66,7 @@
             </div>
             <p class="mt-2 mb-1">{{ $review->text }}</p>
             @auth
-                @if(auth()->user()->id === $review->user_id)
+                @if(auth()->user()->id === $review->user_id || auth()->user()->isModerator())
                 <a href="{{ route('reviews.edit', $review) }}"
                    class="btn btn-sm btn-outline-light">Edit</a>
                 @endif

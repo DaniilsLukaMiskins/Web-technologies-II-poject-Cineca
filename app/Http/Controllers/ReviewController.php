@@ -69,7 +69,7 @@ class ReviewController extends Controller
 
     public function edit(Review $review)
     {
-        if (Auth::id() !== $review->user_id) {
+        if (Auth::id() !== $review->user_id && !Auth::user()->isModerator()) {
             abort(403);
         }
         return view('reviews.edit', compact('review'));
@@ -77,7 +77,7 @@ class ReviewController extends Controller
 
     public function update(Request $request, Review $review)
     {
-        if (Auth::id() !== $review->user_id) {
+        if (Auth::id() !== $review->user_id && !Auth::user()->isModerator()) {
             abort(403);
         }
 
@@ -96,7 +96,7 @@ class ReviewController extends Controller
             'created_at'  => now(),
         ]);
 
-        return redirect()->back()->with('success', 'Review updated!');
+        return redirect()->route('movies.show', $review->movie->tmdb_movie_id)->with('success', 'Review updated!');
     }
 
     public function destroy(Review $review)
