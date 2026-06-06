@@ -19,6 +19,13 @@
             <p>{{ $movieData['overview'] }}</p>
             <p>⭐ {{ number_format($movieData['vote_average'], 1) }}/10</p>
             <p>Release date: {{ $movieData['release_date'] }}</p>
+            <p>Genres:
+                @foreach($movieData['genres'] ?? [] as $genre)
+                    <span class="badge" style="background-color:#6184D8; color:#fff;">
+                        {{ $genre['name'] }}
+                    </span>
+                @endforeach
+            </p>
 
             @auth
             <div class="d-flex gap-2 mb-3">
