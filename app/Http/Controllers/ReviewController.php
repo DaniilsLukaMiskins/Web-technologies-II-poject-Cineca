@@ -1,0 +1,88 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Review;
+use App\Models\Movie;
+use App\Models\AuditLog;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class ReviewController extends Controller
+{
+    public function create(int $tmdbId)
+    {
+        $movie = Movie::where('tmdb_movie_id', $tmdbId)->firstOrFail();
+        return view('reviews.create', compact('movie'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'movie_id' => 'required|exists:movies,id',
+            'text'     => 'nullable|string|max:2000',
+            'grade'    => 'required|integer|min:1|max:10',
+        ]);
+
+        $review = Review::create([
+            'user_id'  => Auth::id(),
+            'movie_id' => $request->movie_id,
+            'text'     => $request->text,
+            'grade'    => $request->grade,
+        ]);
+
+        AuditLog::create([
+            'user_id'     => Auth::id(),
+            'action'      => 'created review',
+            'entity_type' => 'review',
+            'entity_id'   => $review->id,
+            'created_at'  => now(),
+        ]);
+
+        return redirect()->route('movies.show', $request->tmdb_id)
+            ->with('success', 'Review added!');
+    }
+
+    public function edit(Review $review)
+    {
+        $this->authorize('update', $review);
+        return view('reviews.edit', compact('review'));
+    }
+
+    public function update(Request $request, Review $review)
+    {
+        $this->authorize('update', $review);
+        $request->validate([
+            'text'  => 'nullable|string|max:2000',
+            'grade' => 'required|integer|min:1|max:10',
+        ]);
+
+        $review->update($request->only('text', 'grade'));
+
+        AuditLog::create([
+            'user_id'     => Auth::id(),
+            'action'      => 'updated review',
+            'entity_type' => 'review',
+            'entity_id'   => $review->id,
+            'created_at'  => now(),
+        ]);
+
+        return redirect()->back()->with('success', 'Review updated!');
+    }
+
+    public function destroy(Review $review)
+    {
+        $this->authorize('delete', $review);
+
+        AuditLog::create([
+            'user_id'     => Auth::id(),
+            'action'      => 'deleted review',
+            'entity_type' => 'review',
+            'entity_id'   => $review->id,
+            'created_at'  => now(),
+        ]);
+
+        $review->delete();
+        return redirect()->back()->with('success', 'Review deleted!');
+    }
+}
