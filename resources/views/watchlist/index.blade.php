@@ -9,7 +9,7 @@
         <a href="{{ route('movies.index') }}" class="btn btn-primary">Browse Movies</a>
     @endif
 
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row row-cols-2 row-cols-md-4 g-4">
         @foreach($watchlist as $item)
         <div class="col">
             <div class="card h-100">

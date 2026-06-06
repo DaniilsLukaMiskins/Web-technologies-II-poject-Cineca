@@ -45,7 +45,7 @@
         {{-- Recommendations --}}
         @if(isset($recommendations) && count($recommendations) > 0)
         <h2 style="color:#F0F465;">{{ __('messages.recommendations') }}</h2>
-        <div class="row row-cols-2 row-cols-md-4 g-3 mb-5">
+        <div class="row row-cols-2 row-cols-md-4 g-4 mb-5">
             @foreach(array_slice($recommendations, 0, 8) as $movie)
             <div class="col">
                 <div class="card h-100">
