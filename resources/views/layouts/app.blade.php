@@ -70,8 +70,8 @@
 <nav class="navbar px-4">
     <a class="navbar-brand" href="/">Cineca</a>
     <div class="d-flex gap-2 align-items-center">
-        <a href="{{ route('lang.switch', 'en') }}" class="btn btn-sm btn-outline-secondary">EN</a>
-    <a href="{{ route('lang.switch', 'lv') }}" class="btn btn-sm btn-outline-secondary">LV</a>
+        <a href="{{ route('lang.switch', 'en') }}" class="btn btn-sm btn-outline-light">EN</a>
+    <a href="{{ route('lang.switch', 'lv') }}" class="btn btn-sm btn-outline-light">LV</a>
         @auth
             <a href="/watchlist" class="btn btn-outline-light btn-sm">{{ __('messages.watchlist') }}</a>
 <a href="/friends" class="btn btn-outline-light btn-sm">{{ __('messages.friends') }}</a>
