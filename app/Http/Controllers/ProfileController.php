@@ -31,4 +31,11 @@ class ProfileController extends Controller
 
         return redirect()->back()->with('success', 'Avatar updated!');
     }
+
+
+    public function reviews()
+    {
+        $reviews = auth()->user()->reviews()->with('movie')->latest()->get();
+        return view('profile.reviews', compact('reviews'));
+    }
 }

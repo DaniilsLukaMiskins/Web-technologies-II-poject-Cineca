@@ -3,7 +3,10 @@
 @section('content')
 <div class="container">
     <h1 class="mb-4" style="color:#F0F465;">Movies</h1>
-
+        <div class="text-center mt-4 mb-3">
+            <small style="color: rgba(255,255,255,0.5);">Movie data provided by</small><br>
+            <img src="{{ asset('images/tmdb_logo.svg') }}" alt="TMDB" style="height: 20px; margin-top: 5px;">
+        </div>
     <form action="{{ route('movies.search') }}" method="GET" class="mb-4">
         <div class="input-group">
             <input type="text" name="q" class="form-control"

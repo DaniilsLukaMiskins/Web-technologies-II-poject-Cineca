@@ -10,8 +10,9 @@ return [
     'login' => 'Ieiet',
     'register' => 'Reģistrēties',
     'recommendations' => 'Ieteikumi jums',
-    'recently_watched' => 'Nesen skatīts',
+    'recently_reviewed' => 'Nesen novērtēts',
     'movies' => 'Filmas',
     'admin' => 'Administrators',
     'welcome' => 'Laipni lūdzam CineCA',
+    'reviews' => 'Atsauksmes',
 ];

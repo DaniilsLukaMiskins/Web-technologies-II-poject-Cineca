@@ -74,6 +74,9 @@
     <a href="{{ route('lang.switch', 'lv') }}" class="btn btn-sm btn-outline-light">LV</a>
         @auth
             <a href="/watchlist" class="btn btn-outline-light btn-sm">{{ __('messages.watchlist') }}</a>
+            <a href="{{ route('profile.reviews') }}" class="btn btn-outline-light btn-sm">
+                {{ __('messages.reviews') }}
+            </a>
 <a href="/friends" class="btn btn-outline-light btn-sm">{{ __('messages.friends') }}</a>
             @if(auth()->user()->isAdmin())
                 <a href="/admin" class="btn btn-sm"

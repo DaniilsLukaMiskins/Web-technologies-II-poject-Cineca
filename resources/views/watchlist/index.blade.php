@@ -4,6 +4,12 @@
 <div class="container">
     <h1 class="mb-4" style="color:#F0F465;">My Watchlist</h1>
 
+
+        <div class="text-center mt-4 mb-3">
+            <small style="color: rgba(255,255,255,0.5);">Movie data provided by</small><br>
+            <img src="{{ asset('images/tmdb_logo.svg') }}" alt="TMDB" style="height: 20px; margin-top: 5px;">
+        </div>
+        
     @if($watchlist->isEmpty())
         <p>Your watchlist is empty. Go watch some movies!</p>
         <a href="{{ route('movies.index') }}" class="btn btn-primary">Browse Movies</a>

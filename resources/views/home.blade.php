@@ -2,7 +2,10 @@
 
 @section('content')
 <div class="container">
-
+        <div class="text-center mt-4 mb-3">
+            <small style="color: rgba(255,255,255,0.5);">Movie data provided by</small><br>
+            <img src="{{ asset('images/tmdb_logo.svg') }}" alt="TMDB" style="height: 20px; margin-top: 5px;">
+        </div>
     {{-- Search bar --}}
     <div class="row justify-content-center mb-5 mt-3">
         <div class="col-md-8">
@@ -19,7 +22,7 @@
     @auth
         {{-- Recently reviewed --}}
         @if(isset($recentReviews) && $recentReviews->isNotEmpty())
-        <h2 style="color:#F0F465;">{{ __('messages.recently_watched') }}</h2>
+        <h2 style="color:#F0F465;">{{ __('messages.recently_reviewed') }}</h2>
         <div class="row row-cols-2 row-cols-md-5 g-3 mb-5">
             @foreach($recentReviews as $review)
             <div class="col">
@@ -78,6 +81,9 @@
                 Login
             </a>
         </div>
+
+
+        
     @endauth
 
 </div>

@@ -10,8 +10,9 @@ return [
     'login' => 'Login',
     'register' => 'Register',
     'recommendations' => 'Recommendations for you',
-    'recently_watched' => 'Recently watched',
+    'recently_reviewed' => 'Recently reviewed',
     'movies' => 'Movies',
     'admin' => 'Admin',
     'welcome' => 'Welcome to CineCA',
+    'reviews' => 'Reviews',
 ];
