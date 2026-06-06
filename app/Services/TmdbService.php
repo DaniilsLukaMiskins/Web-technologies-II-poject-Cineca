@@ -56,4 +56,15 @@ class TmdbService
 
         return $response->json();
     }
+
+    public function getMoviesByGenre(int $genreId): array
+    {
+        $response = Http::get("{$this->baseUrl}/discover/movie", [
+            'api_key' => $this->apiKey,
+            'with_genres' => $genreId,
+            'language' => 'en-US',
+        ]);
+
+        return $response->json();
+    }
 }

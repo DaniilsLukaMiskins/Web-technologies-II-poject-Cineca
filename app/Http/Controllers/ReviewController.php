@@ -39,19 +39,37 @@ class ReviewController extends Controller
             'created_at'  => now(),
         ]);
 
+        // Update statistics
+        $user = Auth::user();
+        $reviews = $user->reviews;
+        
+        \App\Models\UserStatistic::updateOrCreate(
+            ['user_id' => $user->id],
+            [
+                'amount_of_reviews' => $reviews->count(),
+                'average_grade'     => round($reviews->avg('grade'), 2),
+                'favourite_genre'   => null,
+            ]
+        );
+
         return redirect()->route('movies.show', $request->tmdb_id)
             ->with('success', 'Review added!');
     }
 
     public function edit(Review $review)
     {
-        $this->authorize('update', $review);
+        if (Auth::id() !== $review->user_id) {
+            abort(403);
+        }
         return view('reviews.edit', compact('review'));
     }
 
     public function update(Request $request, Review $review)
     {
-        $this->authorize('update', $review);
+        if (Auth::id() !== $review->user_id) {
+            abort(403);
+        }
+
         $request->validate([
             'text'  => 'nullable|string|max:2000',
             'grade' => 'required|integer|min:1|max:10',
@@ -72,7 +90,9 @@ class ReviewController extends Controller
 
     public function destroy(Review $review)
     {
-        $this->authorize('delete', $review);
+        if (Auth::id() !== $review->user_id && !Auth::user()->isModerator()) {
+            abort(403);
+        }
 
         AuditLog::create([
             'user_id'     => Auth::id(),

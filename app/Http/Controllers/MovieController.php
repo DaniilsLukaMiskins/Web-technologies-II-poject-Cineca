@@ -36,9 +36,38 @@ class MovieController extends Controller
 
     public function search(Request $request)
     {
-        $query = $request->get('q');
+        $query = $request->get('q', '');
+    
+        if (empty($query)) {
+            return redirect()->route('movies.index');
+        }
         $data = $this->tmdb->searchMovies($query);
         $movies = $data['results'] ?? [];
         return view('movies.index', compact('movies', 'query'));
     }
+
+    public function home()
+    {
+        $recentReviews = collect();
+        $recommendations = [];
+
+        if (auth()->check()) {
+            $user = auth()->user();
+
+            $recentReviews = $user->reviews()
+                ->with('movie')
+                ->latest()
+                ->take(5)
+                ->get();
+
+            $stats = $user->statistics;
+            if ($stats && $stats->favourite_genre) {
+                $data = $this->tmdb->getMoviesByGenre($stats->favourite_genre);
+                $recommendations = $data['results'] ?? [];
+            }
+        }
+
+        return view('home', compact('recentReviews', 'recommendations'));
+    }
+    
 }

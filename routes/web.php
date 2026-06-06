@@ -7,11 +7,10 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\WatchlistController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfileController;
 
-// temporary main page
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+//  main page
+Route::get('/', [MovieController::class, 'home'])->name('home');
 
 // only for GUESTS
 Route::middleware('guest')->group(function () {
@@ -50,9 +49,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/friends/{friend}', [FriendController::class, 'destroy'])->name('friends.destroy');
 
     // Admin
-    Route::middleware('can:admin')->group(function () {
+    Route::middleware('role:admin')->group(function () {
         Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
         Route::post('/admin/users/{user}/role', [AdminController::class, 'changeRole'])->name('admin.changeRole');
         Route::get('/admin/log', [AdminController::class, 'log'])->name('admin.log');
     });
+
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
 });
