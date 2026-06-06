@@ -10,7 +10,7 @@
             <div class="card mb-4">
     <div class="card-body text-center">
         @if(auth()->user()->avatar)
-            <img src="{{ Storage::url(auth()->user()->avatar) }}"
+            <img src="{{ asset('storage/' . auth()->user()->avatar) }}"
                  class="rounded-circle mb-3"
                  style="width:100px; height:100px; object-fit:cover;">
         @else
