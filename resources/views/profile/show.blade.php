@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@use('Illuminate\Support\Facades\Storage')
 @section('content')
 <div class="container">
     <h1 class="mb-4" style="color:#F0F465;">My Profile</h1>
@@ -8,21 +8,40 @@
         {{-- Profile info --}}
         <div class="col-md-4">
             <div class="card mb-4">
-                <div class="card-body text-center">
-                    <div class="rounded-circle d-inline-flex align-items-center
-                                justify-content-center mb-3"
-                         style="width:100px; height:100px;
-                                background-color:#6184D8; font-size:2rem;">
-                        👤
-                    </div>
-                    <h4>{{ auth()->user()->username }}</h4>
-                    <p class="text-muted">{{ auth()->user()->email }}</p>
-                    <span class="badge"
-                          style="background-color:#F0F465; color:#000; font-size:0.9rem;">
-                        {{ auth()->user()->role->name }}
-                    </span>
-                </div>
+    <div class="card-body text-center">
+        @if(auth()->user()->avatar)
+            <img src="{{ Storage::url(auth()->user()->avatar) }}"
+                 class="rounded-circle mb-3"
+                 style="width:100px; height:100px; object-fit:cover;">
+        @else
+            <div class="rounded-circle d-inline-flex align-items-center
+                        justify-content-center mb-3"
+                 style="width:100px; height:100px;
+                        background-color:#6184D8; font-size:2rem;">
+                👤
             </div>
+        @endif
+        <h4>{{ auth()->user()->username }}</h4>
+        <p class="text-muted">{{ auth()->user()->email }}</p>
+        <span class="badge"
+              style="background-color:#F0F465; color:#000; font-size:0.9rem;">
+            {{ auth()->user()->role->name }}
+        </span>
+
+        <form action="{{ route('profile.avatar') }}" method="POST"
+              enctype="multipart/form-data" class="mt-3">
+            @csrf
+            <input type="file" name="avatar" class="form-control mb-2"
+                   accept="image/*">
+            @error('avatar')
+                <small class="text-warning">{{ $message }}</small>
+            @enderror
+            <button type="submit" class="btn btn-primary btn-sm">
+                Upload Avatar
+            </button>
+        </form>
+    </div>
+</div>
 
             {{-- Statistics --}}
             <div class="card">
