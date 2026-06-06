@@ -14,7 +14,7 @@ class CheckRole
         }
 
         if (!in_array(auth()->user()->role->name, $roles)) {
-            abort(403);
+            return redirect('/')->with('error', 'You do not have access to this page.');
         }
 
         return $next($request);

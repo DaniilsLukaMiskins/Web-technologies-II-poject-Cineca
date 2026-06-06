@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 
 //  main page
 Route::get('/', [MovieController::class, 'home'])->name('home');
+
 Route::get('/lang/{locale}', function ($locale) {
     $supported = ['en', 'lv'];
     if (in_array($locale, $supported)) {
@@ -18,6 +19,7 @@ Route::get('/lang/{locale}', function ($locale) {
     }
     return redirect()->back();
 })->name('lang.switch');
+
 // only for GUESTS
 Route::middleware('guest')->group(function () {
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
@@ -26,9 +28,13 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
 });
 
-// only for AUTHORIZED
+// only for AUTHORIZED (including visitor - only logout)
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
+
+// only for user, moderator, admin (NOT visitor)
+Route::middleware(['auth', 'role:user,moderator,admin'])->group(function () {
 
     // Movies
     Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
@@ -54,16 +60,15 @@ Route::middleware('auth')->group(function () {
     Route::put('/friends/{friend}', [FriendController::class, 'update'])->name('friends.update');
     Route::delete('/friends/{friend}', [FriendController::class, 'destroy'])->name('friends.destroy');
 
+    // Profile
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+    Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar');
+    Route::get('/profile/reviews', [ProfileController::class, 'reviews'])->name('profile.reviews');
+
     // Admin
     Route::middleware('role:admin')->group(function () {
         Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
         Route::post('/admin/users/{user}/role', [AdminController::class, 'changeRole'])->name('admin.changeRole');
         Route::get('/admin/log', [AdminController::class, 'log'])->name('admin.log');
     });
-
-    Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
-    Route::post('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar');
-
-
-    Route::get('/profile/reviews', [ProfileController::class, 'reviews'])->name('profile.reviews');
 });
