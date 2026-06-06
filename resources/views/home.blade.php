@@ -9,8 +9,8 @@
             <form action="{{ route('movies.search') }}" method="GET">
                 <div class="input-group">
                     <input type="text" name="q" class="form-control form-control-lg"
-                           placeholder="Search movies...">
-                    <button class="btn btn-primary btn-lg" type="submit">Search</button>
+                           placeholder="{{ __('messages.search') }}...">
+                    <button class="btn btn-primary btn-lg" type="submit">{{ __('messages.search') }}</button>
                 </div>
             </form>
         </div>
@@ -19,7 +19,7 @@
     @auth
         {{-- Recently reviewed --}}
         @if(isset($recentReviews) && $recentReviews->isNotEmpty())
-        <h2 style="color:#F0F465;">Recently Reviewed</h2>
+        <h2 style="color:#F0F465;">{{ __('messages.recently_watched') }}</h2>
         <div class="row row-cols-2 row-cols-md-5 g-3 mb-5">
             @foreach($recentReviews as $review)
             <div class="col">
@@ -44,7 +44,7 @@
 
         {{-- Recommendations --}}
         @if(isset($recommendations) && count($recommendations) > 0)
-        <h2 style="color:#F0F465;">Recommendations for you</h2>
+        <h2 style="color:#F0F465;">{{ __('messages.recommendations') }}</h2>
         <div class="row row-cols-2 row-cols-md-5 g-3 mb-5">
             @foreach(array_slice($recommendations, 0, 10) as $movie)
             <div class="col">
@@ -67,7 +67,7 @@
     @else
         {{-- Guest message --}}
         <div class="text-center mt-5">
-            <h1 style="color:#F0F465;">Welcome to CineCA</h1>
+            <h1 style="color:#F0F465;">{{ __('messages.welcome') }}</h1>
             <p class="lead">Your personal movie tracker</p>
             <a href="{{ route('register') }}" class="btn btn-primary btn-lg me-2">
                 Get Started

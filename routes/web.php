@@ -11,7 +11,13 @@ use App\Http\Controllers\ProfileController;
 
 //  main page
 Route::get('/', [MovieController::class, 'home'])->name('home');
-
+Route::get('/lang/{locale}', function ($locale) {
+    $supported = ['en', 'lv'];
+    if (in_array($locale, $supported)) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+})->name('lang.switch');
 // only for GUESTS
 Route::middleware('guest')->group(function () {
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');

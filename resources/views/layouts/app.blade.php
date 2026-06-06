@@ -70,12 +70,14 @@
 <nav class="navbar px-4">
     <a class="navbar-brand" href="/">Cineca</a>
     <div class="d-flex gap-2 align-items-center">
+        <a href="{{ route('lang.switch', 'en') }}" class="btn btn-sm btn-outline-secondary">EN</a>
+    <a href="{{ route('lang.switch', 'lv') }}" class="btn btn-sm btn-outline-secondary">LV</a>
         @auth
-            <a href="/watchlist" class="btn btn-outline-light btn-sm">Watchlist</a>
-            <a href="/friends" class="btn btn-outline-light btn-sm">Friends</a>
+            <a href="/watchlist" class="btn btn-outline-light btn-sm">{{ __('messages.watchlist') }}</a>
+<a href="/friends" class="btn btn-outline-light btn-sm">{{ __('messages.friends') }}</a>
             @if(auth()->user()->isAdmin())
                 <a href="/admin" class="btn btn-sm"
-                   style="background-color:#F0F465; color:#000; font-weight:bold;">Admin</a>
+                   style="background-color:#F0F465; color:#000; font-weight:bold;">{{ __('messages.admin') }}</a>
             @endif
             <a href="/profile" class="btn btn-outline-light btn-sm">
                 {{ auth()->user()->username }}
@@ -83,14 +85,13 @@
             <form action="{{ route('logout') }}" method="POST" class="d-inline">
                 @csrf
                 <button class="btn btn-sm"
-                        style="background-color:#50C5B7; color:#000; font-weight:bold;">
-                    Logout
+                        style="background-color:#50C5B7; color:#000; font-weight:bold;">{{ __('messages.logout') }}
                 </button>
             </form>
         @else
-            <a href="{{ route('login') }}" class="btn btn-outline-light btn-sm">Login</a>
+            <a href="{{ route('login') }}" class="btn btn-outline-light btn-sm">{{ __('messages.login') }}</a>
             <a href="{{ route('register') }}" class="btn btn-sm"
-               style="background-color:#50C5B7; color:#000; font-weight:bold;">Register</a>
+               style="background-color:#50C5B7; color:#000; font-weight:bold;">{{ __('messages.register') }}</a>
         @endauth
     </div>
 </nav>
