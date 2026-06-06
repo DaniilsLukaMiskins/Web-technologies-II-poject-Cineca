@@ -50,4 +50,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(AuditLog::class);
     }
+
+
+    public function isAdmin(): bool
+    {
+        return $this->role->name === 'admin';
+    }
+
+    public function isModerator(): bool
+    {
+        return in_array($this->role->name, ['moderator', 'admin']);
+    }
 }
