@@ -16,45 +16,56 @@ class ReviewController extends Controller
         return view('reviews.create', compact('movie'));
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'movie_id' => 'required|exists:movies,id',
-            'text'     => 'nullable|string|max:2000',
-            'grade'    => 'required|integer|min:1|max:10',
-        ]);
+   public function store(Request $request)
+{
+    $request->validate([
+        'movie_id' => 'required|exists:movies,id',
+        'text'     => 'nullable|string|max:2000',
+        'grade'    => 'required|integer|min:1|max:10',
+    ]);
 
-        $review = Review::create([
-            'user_id'  => Auth::id(),
-            'movie_id' => $request->movie_id,
-            'text'     => $request->text,
-            'grade'    => $request->grade,
-        ]);
+    $review = Review::create([
+        'user_id'  => Auth::id(),
+        'movie_id' => $request->movie_id,
+        'text'     => $request->text,
+        'grade'    => $request->grade,
+    ]);
 
-        AuditLog::create([
-            'user_id'     => Auth::id(),
-            'action'      => 'created review',
-            'entity_type' => 'review',
-            'entity_id'   => $review->id,
-            'created_at'  => now(),
-        ]);
+    AuditLog::create([
+        'user_id'     => Auth::id(),
+        'action'      => 'created review',
+        'entity_type' => 'review',
+        'entity_id'   => $review->id,
+        'created_at'  => now(),
+    ]);
 
-        // Update statistics
-        $user = Auth::user();
-        $reviews = $user->reviews;
-        
-        \App\Models\UserStatistic::updateOrCreate(
-            ['user_id' => $user->id],
-            [
-                'amount_of_reviews' => $reviews->count(),
-                'average_grade'     => round($reviews->avg('grade'), 2),
-                'favourite_genre'   => null,
-            ]
-        );
+    // Update statistics
+    $user = Auth::user();
+    $reviews = $user->reviews()->with('movie')->get();
 
-        return redirect()->route('movies.show', $request->tmdb_id)
-            ->with('success', 'Review added!');
+    $tmdb = new \App\Services\TmdbService();
+    $genreCounts = [];
+    foreach ($reviews as $r) {
+        $movieData = $tmdb->getMovie($r->movie->tmdb_movie_id);
+        foreach ($movieData['genres'] ?? [] as $genre) {
+            $genreCounts[$genre['name']] = ($genreCounts[$genre['name']] ?? 0) + 1;
+        }
     }
+    arsort($genreCounts);
+    $favouriteGenre = !empty($genreCounts) ? array_key_first($genreCounts) : null;
+
+    \App\Models\UserStatistic::updateOrCreate(
+        ['user_id' => $user->id],
+        [
+            'amount_of_reviews' => $reviews->count(),
+            'average_grade'     => round($reviews->avg('grade'), 2),
+            'favourite_genre'   => $favouriteGenre,
+        ]
+    );
+
+    return redirect()->route('movies.show', $request->tmdb_id)
+        ->with('success', 'Review added!');
+}
 
     public function edit(Review $review)
     {
