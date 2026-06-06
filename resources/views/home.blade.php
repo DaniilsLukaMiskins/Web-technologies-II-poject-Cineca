@@ -45,19 +45,21 @@
         {{-- Recommendations --}}
         @if(isset($recommendations) && count($recommendations) > 0)
         <h2 style="color:#F0F465;">{{ __('messages.recommendations') }}</h2>
-        <div class="row row-cols-2 row-cols-md-5 g-3 mb-5">
-            @foreach(array_slice($recommendations, 0, 10) as $movie)
+        <div class="row row-cols-2 row-cols-md-4 g-3 mb-5">
+            @foreach(array_slice($recommendations, 0, 8) as $movie)
             <div class="col">
                 <div class="card h-100">
                     @if($movie['poster_path'])
-                    <img src="https://image.tmdb.org/t/p/w200{{ $movie['poster_path'] }}"
-                         class="card-img-top" alt="{{ $movie['title'] }}">
+                    <img src="https://image.tmdb.org/t/p/w300{{ $movie['poster_path'] }}"
+                        class="card-img-top" alt="{{ $movie['title'] }}">
                     @endif
                     <div class="card-body">
+                        <h6 class="card-title">{{ $movie['title'] }}</h6>
+                        <p class="card-text">
+                            <small>⭐ {{ number_format($movie['vote_average'], 1) }}</small>
+                        </p>
                         <a href="{{ route('movies.show', $movie['id']) }}"
-                           class="text-light text-decoration-none small">
-                            {{ $movie['title'] }}
-                        </a>
+                        class="btn btn-primary btn-sm">View</a>
                     </div>
                 </div>
             </div>
