@@ -6,7 +6,7 @@
         <div class="card shadow-lg">
             <div class="card-body p-5">
                 <h1 class="mb-4 fw-bold" style="color:#F0F465;">
-                    Write Review
+                    {{ __('messages.write_review_title') }}
                 </h1>
                 <h5 class="mb-4">{{ $movie->title }}</h5>
 
@@ -16,7 +16,7 @@
                     <input type="hidden" name="tmdb_id" value="{{ $movie->tmdb_movie_id }}">
 
                     <div class="mb-3">
-                        <label class="form-label">Grade (1-10)</label>
+                        <label class="form-label">{{ __('messages.grade') }}</label>
                         <input type="number" name="grade" class="form-control"
                                min="1" max="10" required>
                         @error('grade')
@@ -25,20 +25,20 @@
                     </div>
 
                     <div class="mb-4">
-                        <label class="form-label">Review Text</label>
+                        <label class="form-label">{{ __('messages.review_text') }}</label>
                         <textarea name="text" class="form-control"
-                                  rows="5" placeholder="Write your review...">{{ old('text') }}</textarea>
+                                  rows="5" placeholder="{{ __('messages.review_placeholder') }}">{{ old('text') }}</textarea>
                         @error('text')
                             <small class="text-warning">{{ $message }}</small>
                         @enderror
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100 py-2">
-                        Submit Review
+                        {{ __('messages.submit_review') }}
                     </button>
                     <a href="{{ route('movies.show', $movie->tmdb_movie_id) }}"
                        class="btn btn-outline-light w-100 mt-2">
-                        Cancel
+                        {{ __('messages.cancel') }}
                     </a>
                 </form>
             </div>

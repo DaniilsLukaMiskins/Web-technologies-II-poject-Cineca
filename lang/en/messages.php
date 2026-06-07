@@ -53,5 +53,11 @@ return [
     'login_title' => 'Login yourself',
     'no_account' => 'No account?',
     'tagline' => 'Your personal movie tracker',
+    'my_reviews' => 'My Reviews',
+    'write_review_title' => 'Write Review',
+    'grade' => 'Grade (1-10)',
+    'review_text' => 'Review Text',
+    'review_placeholder' => 'Write your review...',
+    'submit_review' => 'Submit Review',
 
 ];

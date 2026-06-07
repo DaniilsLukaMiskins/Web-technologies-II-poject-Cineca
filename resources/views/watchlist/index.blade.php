@@ -14,7 +14,7 @@
         <a href="{{ route('movies.index') }}" class="btn btn-primary">{{ __('messages.browse_movies') }}</a>
     @endif
 
-    <div class="row row-cols-2 row-cols-md-4 g-4">
+    <div class="row row-cols-2 row-cols-md-4 g-4 align-items-start">
         @foreach($watchlist as $item)
         <div class="col">
             <div class="card h-100">
@@ -24,7 +24,7 @@
      style="height:300px; object-fit:cover;">
                 @endif
                 <div class="card-body">
-                    <h5 class="card-title">{{ $item->movie->title }}</h5>
+                    <h5 class="card-title" style="min-height:48px; overflow:hidden;">{{ $item->movie->title }}</h5>
 
                     <form action="{{ route('watchlist.update', $item) }}" method="POST" class="mb-2">
                         @csrf

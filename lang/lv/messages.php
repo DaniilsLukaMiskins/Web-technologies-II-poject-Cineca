@@ -54,4 +54,9 @@ return [
     'login_title' => 'Ieiet sistēmā',
     'no_account' => 'Nav konta?',
    'tagline' => 'Tavs personīgais filmu izsekotājs',
+    'write_review_title' => 'Rakstīt atsauksmi',
+    'grade' => 'Vērtējums (1-10)',
+    'review_text' => 'Atsauksmes teksts',
+    'review_placeholder' => 'Rakstiet savu atsauksmi...',
+    'submit_review' => 'Iesniegt atsauksmi',
 ];

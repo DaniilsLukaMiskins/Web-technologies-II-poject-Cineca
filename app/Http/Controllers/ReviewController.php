@@ -52,7 +52,15 @@ class ReviewController extends Controller
             'text'     => 'nullable|string|max:2000',
             'grade'    => 'required|integer|min:1|max:10',
         ]);
+        // Check if user already reviewed this movie
+    $existing = Review::where('user_id', Auth::id())
+        ->where('movie_id', $request->movie_id)
+        ->first();
 
+    if ($existing) {
+    return redirect()->route('movies.show', $request->tmdb_id)
+        ->with('error', 'You have already reviewed this movie!');
+}
         $review = Review::create([
             'user_id'  => Auth::id(),
             'movie_id' => $request->movie_id,
