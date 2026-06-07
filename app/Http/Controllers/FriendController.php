@@ -66,7 +66,15 @@ class FriendController extends Controller
 
     public function destroy(Friend $friend)
     {
-        $friend->delete();
+        // deleting for borh users
+        Friend::where(function($query) use ($friend) {
+            $query->where('user_id', $friend->user_id)
+                ->where('friend_id', $friend->friend_id);
+        })->orWhere(function($query) use ($friend) {
+            $query->where('user_id', $friend->friend_id)
+                ->where('friend_id', $friend->user_id);
+        })->delete();
+
         return redirect()->back()->with('success', 'Friend removed!');
     }
 }
