@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AuditLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -29,9 +30,16 @@ class ProfileController extends Controller
         $path = $request->file('avatar')->store('avatars', 'public');
         $user->update(['avatar' => $path]);
 
+        AuditLog::create([
+            'user_id'     => $user->id,
+            'action'      => 'updated avatar',
+            'entity_type' => 'user',
+            'entity_id'   => $user->id,
+            'created_at'  => now(),
+        ]);
+
         return redirect()->back()->with('success', 'Avatar updated!');
     }
-
 
     public function reviews()
     {

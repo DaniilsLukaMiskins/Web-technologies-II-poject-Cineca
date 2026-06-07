@@ -26,47 +26,72 @@ class FriendController extends Controller
     }
 
     public function store(Request $request)
-{
-    $request->validate([
-        'username' => 'required|exists:users,username',
-    ]);
-
-    $friend = \App\Models\User::where('username', $request->username)->first();
-
-    if ($friend->id === Auth::id()) {
-        return redirect()->back()->with('error', 'You cannot add yourself!');
-    }
-
-    Friend::firstOrCreate([
-        'user_id'   => Auth::id(),
-        'friend_id' => $friend->id,
-        'status'    => 'pending',
-    ]);
-
-    return redirect()->back()->with('success', 'Friend request sent!');
-}
-   public function update(Request $request, Friend $friend)
-{
-    $request->validate([
-        'status' => 'required|in:accepted,rejected',
-    ]);
-
-    $friend->update(['status' => $request->status]);
-
-    if ($request->status === 'accepted') {
-        Friend::firstOrCreate([
-            'user_id'   => $friend->friend_id,
-            'friend_id' => $friend->user_id,
-            'status'    => 'accepted',
+    {
+        $request->validate([
+            'username' => 'required|exists:users,username',
         ]);
+
+        $friend = User::where('username', $request->username)->first();
+
+        if ($friend->id === Auth::id()) {
+            return redirect()->back()->with('error', 'You cannot add yourself!');
+        }
+
+        Friend::firstOrCreate([
+            'user_id'   => Auth::id(),
+            'friend_id' => $friend->id,
+            'status'    => 'pending',
+        ]);
+
+        AuditLog::create([
+            'user_id'     => Auth::id(),
+            'action'      => 'sent friend request',
+            'entity_type' => 'user',
+            'entity_id'   => $friend->id,
+            'created_at'  => now(),
+        ]);
+
+        return redirect()->back()->with('success', 'Friend request sent!');
     }
 
-    return redirect()->back()->with('success', 'Friend request updated!');
-}
+    public function update(Request $request, Friend $friend)
+    {
+        $request->validate([
+            'status' => 'required|in:accepted,rejected',
+        ]);
+
+        $friend->update(['status' => $request->status]);
+
+        if ($request->status === 'accepted') {
+            Friend::firstOrCreate([
+                'user_id'   => $friend->friend_id,
+                'friend_id' => $friend->user_id,
+                'status'    => 'accepted',
+            ]);
+        }
+
+        AuditLog::create([
+            'user_id'     => Auth::id(),
+            'action'      => $request->status === 'accepted' ? 'accepted friend request' : 'rejected friend request',
+            'entity_type' => 'user',
+            'entity_id'   => $friend->user_id,
+            'created_at'  => now(),
+        ]);
+
+        return redirect()->back()->with('success', 'Friend request updated!');
+    }
 
     public function destroy(Friend $friend)
     {
-        // deleting for borh users
+        AuditLog::create([
+            'user_id'     => Auth::id(),
+            'action'      => 'removed friend',
+            'entity_type' => 'user',
+            'entity_id'   => $friend->friend_id,
+            'created_at'  => now(),
+        ]);
+
+        // deleting for both users
         Friend::where(function($query) use ($friend) {
             $query->where('user_id', $friend->user_id)
                 ->where('friend_id', $friend->friend_id);
