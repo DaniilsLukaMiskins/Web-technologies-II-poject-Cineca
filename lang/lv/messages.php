@@ -39,4 +39,7 @@ return [
     'edit' => 'Rediģēt',
     'save' => 'Saglabāt',
     'cancel' => 'Atcelt',
+    'provided_by' => 'Filmu dati nodrošina',
+    'my_reviews' => 'Manas atsauksmes',
+   
 ];

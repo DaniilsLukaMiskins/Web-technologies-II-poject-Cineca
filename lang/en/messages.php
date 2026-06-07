@@ -39,4 +39,5 @@ return [
     'edit' => 'Edit',
     'save' => 'Save',
     'cancel' => 'Cancel',
+    'provided_by' => 'Movie data provided by',
 ];

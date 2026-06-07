@@ -2,14 +2,14 @@
 
 @section('content')
 <div class="container">
-    <h1 class="mb-4" style="color:#F0F465;">My Reviews</h1>
-        <div class="text-center mt-4 mb-3">
-            <small style="color: rgba(255,255,255,0.5);">Movie data provided by</small><br>
-            <img src="{{ asset('images/tmdb_logo.svg') }}" alt="TMDB" style="height: 20px; margin-top: 5px;">
-        </div>
+    <h1 class="mb-4" style="color:#F0F465;">{{ __('messages.my_reviews') }}</h1>
+    <div class="text-center mt-4 mb-3">
+        <small style="color: rgba(255,255,255,0.5);">{{ __('messages.provided_by') }}</small><br>
+        <img src="{{ asset('images/tmdb_logo.svg') }}" alt="TMDB" style="height: 20px; margin-top: 5px;">
+    </div>
     @if($reviews->isEmpty())
-        <p>You haven't reviewed any movies yet.</p>
-        <a href="{{ route('movies.index') }}" class="btn btn-primary">Browse Movies</a>
+        <p>{{ __('messages.no_reviews') }}</p>
+        <a href="{{ route('movies.index') }}" class="btn btn-primary">{{ __('messages.browse_movies') }}</a>
     @else
         <div class="row row-cols-1 g-3">
             @foreach($reviews as $review)
@@ -32,11 +32,11 @@
                         </small>
                         <div class="d-flex gap-2 mt-2">
                             <a href="{{ route('reviews.edit', $review) }}"
-                               class="btn btn-sm btn-outline-light">Edit</a>
+                               class="btn btn-sm btn-outline-light">{{ __('messages.edit') }}</a>
                             <form action="{{ route('reviews.destroy', $review) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-sm btn-danger">Delete</button>
+                                <button class="btn btn-sm btn-danger">{{ __('messages.delete') }}</button>
                             </form>
                         </div>
                     </div>
