@@ -24,7 +24,7 @@
                     <p class="text-muted">{{ auth()->user()->email }}</p>
                     <span class="badge"
                           style="background-color:#F0F465; color:#000; font-size:0.9rem;">
-                        {{ auth()->user()->role->name }}
+                        {{ __('messages.role_' . auth()->user()->role->name) }}
                     </span>
 
                     <form action="{{ route('profile.avatar') }}" method="POST"

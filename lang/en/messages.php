@@ -40,4 +40,18 @@ return [
     'save' => 'Save',
     'cancel' => 'Cancel',
     'provided_by' => 'Movie data provided by',
+    'role_visitor' => 'Visitor',
+    'role_user' => 'User',
+    'role_moderator' => 'Moderator',
+    'role_admin' => 'Admin',
+    'register_title' => 'Register user',
+    'username' => 'Username',
+    'email' => 'Email',
+    'password' => 'Password',
+    'confirm_password' => 'Confirm Password',
+    'already_account' => 'Already have an account?',
+    'login_title' => 'Login yourself',
+    'no_account' => 'No account?',
+    'tagline' => 'Your personal movie tracker',
+
 ];

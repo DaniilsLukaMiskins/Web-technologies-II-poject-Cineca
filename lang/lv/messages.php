@@ -41,5 +41,17 @@ return [
     'cancel' => 'Atcelt',
     'provided_by' => 'Filmu dati nodrošina',
     'my_reviews' => 'Manas atsauksmes',
-   
+    'role_visitor' => 'Viesis',
+    'role_user' => 'Lietotājs',
+    'role_moderator' => 'Moderators',
+    'role_admin' => 'Administrators',
+    'register_title' => 'Reģistrēt lietotāju',
+    'username' => 'Lietotājvārds',
+    'email' => 'E-pasts',
+    'password' => 'Parole',
+    'confirm_password' => 'Apstiprināt paroli',
+    'already_account' => 'Jau ir konts?',
+    'login_title' => 'Ieiet sistēmā',
+    'no_account' => 'Nav konta?',
+   'tagline' => 'Tavs personīgais filmu izsekotājs',
 ];

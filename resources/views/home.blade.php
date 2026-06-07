@@ -54,7 +54,8 @@
                 <div class="card h-100">
                     @if($movie['poster_path'])
                     <img src="https://image.tmdb.org/t/p/w300{{ $movie['poster_path'] }}"
-                        class="card-img-top" alt="{{ $movie['title'] }}">
+    class="card-img-top" alt="{{ $movie['title'] }}"
+    style="height:300px; object-fit:cover;">
                     @endif
                     <div class="card-body">
                         <h6 class="card-title">{{ $movie['title'] }}</h6>
@@ -74,7 +75,7 @@ class="btn btn-primary btn-sm">{{ __('messages.view') }}</a>
         {{-- Guest message --}}
         <div class="text-center mt-5">
             <h1 style="color:#F0F465;">{{ __('messages.welcome') }}</h1>
-            <p class="lead">Your personal movie tracker</p>
+            <p class="lead">{{ __('messages.tagline') }}</p>
             <a href="{{ route('register') }}" class="btn btn-primary btn-lg me-2">
     {{ __('messages.get_started') }}
 </a>            <a href="{{ route('login') }}" class="btn btn-outline-light btn-lg">
