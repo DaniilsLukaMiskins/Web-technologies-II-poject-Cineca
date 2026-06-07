@@ -72,11 +72,20 @@ class MovieController extends Controller
             $data = $this->tmdb->getMoviesByGenre($stats->favourite_genre);
             $allMovies = $data['results'] ?? [];
             
-            // Filter out already reviewed movies
-            $recommendations = array_filter($allMovies, function($movie) use ($reviewedTmdbIds) {
-                return !in_array($movie['id'], $reviewedTmdbIds);
+            // Get IDs of movies in watchlist
+            $watchlistTmdbIds = $user->watchlist()
+                ->with('movie')
+                ->get()
+                ->pluck('movie.tmdb_movie_id')
+                ->toArray();
+
+            // Filter out already reviewed AND watchlisted movies
+            $excludedIds = array_merge($reviewedTmdbIds, $watchlistTmdbIds);
+
+            $recommendations = array_filter($allMovies, function($movie) use ($excludedIds) {
+                return !in_array($movie['id'], $excludedIds);
             });
-            
+
             $recommendations = array_values($recommendations);
         }
     }
