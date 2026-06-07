@@ -37,7 +37,25 @@ class FriendController extends Controller
             return redirect()->back()->with('error', 'You cannot add yourself!');
         }
 
-        Friend::firstOrCreate([
+        // check if it is already a friend
+        $existing = Friend::where(function($query) use ($friend) {
+            $query->where('user_id', Auth::id())
+                ->where('friend_id', $friend->id);
+        })->orWhere(function($query) use ($friend) {
+            $query->where('user_id', $friend->id)
+                ->where('friend_id', Auth::id());
+        })->first();
+
+        if ($existing) {
+            if ($existing->status === 'accepted') {
+                return redirect()->back()->with('error', 'This user is already your friend!');
+            }
+            if ($existing->status === 'pending') {
+                return redirect()->back()->with('error', 'Friend request already sent!');
+            }
+        }
+
+        Friend::create([
             'user_id'   => Auth::id(),
             'friend_id' => $friend->id,
             'status'    => 'pending',
