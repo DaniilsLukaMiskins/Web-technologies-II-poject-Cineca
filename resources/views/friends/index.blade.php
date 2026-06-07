@@ -53,11 +53,17 @@
     <h2 class="mt-4 mb-3" style="color:#F0F465;">{{ __('messages.add_friend') }}</h2>
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('friends.store') }}" method="POST" class="d-flex gap-2">
+            <form action="{{ route('friends.store') }}" method="POST" class="d-flex flex-column gap-2">
                 @csrf
-                <input type="text" name="username" class="form-control"
-                       placeholder="{{ __('messages.enter_username') }}">
-                <button class="btn btn-primary">{{ __('messages.send_request') }}</button>
+                <div class="d-flex gap-2">
+                    <input type="text" name="username" class="form-control"
+                        placeholder="{{ __('messages.enter_username') }}"
+                        value="{{ old('username') }}">
+                    <button class="btn btn-primary">{{ __('messages.send_request') }}</button>
+                </div>
+                @error('username')
+                    <small class="text-warning">{{ $message }}</small>
+                @enderror
             </form>
         </div>
     </div>
