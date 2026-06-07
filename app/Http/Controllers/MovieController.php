@@ -46,28 +46,41 @@ class MovieController extends Controller
         return view('movies.index', compact('movies', 'query'));
     }
 
-    public function home()
-    {
-        $recentReviews = collect();
-        $recommendations = [];
+  public function home()
+{
+    $recentReviews = collect();
+    $recommendations = [];
 
-        if (auth()->check()) {
-            $user = auth()->user();
+    if (auth()->check()) {
+        $user = auth()->user();
 
-            $recentReviews = $user->reviews()
-                ->with('movie')
-                ->latest()
-                ->take(5)
-                ->get();
+        $recentReviews = $user->reviews()
+            ->with('movie')
+            ->latest()
+            ->take(5)
+            ->get();
 
-            $stats = $user->statistics;
-            if ($stats && $stats->favourite_genre) {
-                $data = $this->tmdb->getMoviesByGenre($stats->favourite_genre);
-                $recommendations = $data['results'] ?? [];
-            }
+        // Get IDs of movies user already reviewed
+        $reviewedTmdbIds = $user->reviews()
+            ->with('movie')
+            ->get()
+            ->pluck('movie.tmdb_movie_id')
+            ->toArray();
+
+        $stats = $user->statistics;
+        if ($stats && $stats->favourite_genre) {
+            $data = $this->tmdb->getMoviesByGenre($stats->favourite_genre);
+            $allMovies = $data['results'] ?? [];
+            
+            // Filter out already reviewed movies
+            $recommendations = array_filter($allMovies, function($movie) use ($reviewedTmdbIds) {
+                return !in_array($movie['id'], $reviewedTmdbIds);
+            });
+            
+            $recommendations = array_values($recommendations);
         }
-
-        return view('home', compact('recentReviews', 'recommendations'));
     }
-    
+
+    return view('home', compact('recentReviews', 'recommendations'));
+}
 }
