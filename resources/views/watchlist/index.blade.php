@@ -20,7 +20,8 @@
             <div class="card h-100">
                 @if($item->poster)
                     <img src="https://image.tmdb.org/t/p/w300{{ $item->poster }}"
-                         class="card-img-top" alt="{{ $item->movie->title }}">
+     class="card-img-top" alt="{{ $item->movie->title }}"
+     style="height:300px; object-fit:cover;">
                 @endif
                 <div class="card-body">
                     <h5 class="card-title">{{ $item->movie->title }}</h5>
