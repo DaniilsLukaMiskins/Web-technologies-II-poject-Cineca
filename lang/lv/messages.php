@@ -59,4 +59,9 @@ return [
     'review_text' => 'Atsauksmes teksts',
     'review_placeholder' => 'Rakstiet savu atsauksmi...',
     'submit_review' => 'Iesniegt atsauksmi',
+    'amount_of_reviews' => 'Atsauksmes',
+    'average_grade' => 'Vidējā vērtēšana',
+    'favourite_genre' => 'Mīļākais žanrs',
+    'genres' => 'Žanri',
+    'release_date' => 'Iznākšanas datums',
 ];

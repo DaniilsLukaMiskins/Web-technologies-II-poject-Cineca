@@ -45,9 +45,9 @@
                 <div class="card-body">
                     <h5 style="color:#F0F465;">{{ __('messages.statistics') }}</h5>
                     @if($stats)
-                        <p>{{ __('messages.reviews') }}: <strong>{{ $stats->amount_of_reviews }}</strong></p>
-                        <p>Average grade: ⭐ <strong>{{ number_format($stats->average_grade, 1) }}</strong></p>
-                        <p>Favourite genre: <strong>{{ $stats->favourite_genre ?? 'N/A' }}</strong></p>
+                      <p>{{ __('messages.amount_of_reviews') }}: <strong>{{ $stats->amount_of_reviews }}</strong></p>
+                      <p>{{ __('messages.average_grade') }}: ⭐ <strong>{{ number_format($stats->average_grade, 1) }}</strong></p>
+                      <p>{{ __('messages.favourite_genre') }}: <strong>{{ $stats->favourite_genre ?? 'N/A' }}</strong></p>
                     @else
                         <p>{{ __('messages.no_statistics') }}</p>
                     @endif

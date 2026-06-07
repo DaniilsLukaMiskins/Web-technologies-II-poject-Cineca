@@ -59,5 +59,10 @@ return [
     'review_text' => 'Review Text',
     'review_placeholder' => 'Write your review...',
     'submit_review' => 'Submit Review',
+    'amount_of_reviews' => 'Reviews',
+    'average_grade' => 'Average grade',
+    'favourite_genre' => 'Favourite genre',
+    'genres' => 'Genres',
+'release_date' => 'Release date',
 
 ];

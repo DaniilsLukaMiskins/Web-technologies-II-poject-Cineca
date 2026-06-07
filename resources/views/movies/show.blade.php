@@ -18,8 +18,8 @@
             <h1 style="color:#F0F465;">{{ $movieData['title'] }}</h1>
             <p>{{ $movieData['overview'] }}</p>
             <p>⭐ {{ number_format($movieData['vote_average'], 1) }}/10</p>
-            <p>Release date: {{ $movieData['release_date'] }}</p>
-            <p>Genres:
+           <p>{{ __('messages.release_date') }}: {{ $movieData['release_date'] }}</p>
+<p>{{ __('messages.genres') }}:
                 @foreach($movieData['genres'] ?? [] as $genre)
                     <span class="badge" style="background-color:#6184D8; color:#fff;">
                         {{ $genre['name'] }}
