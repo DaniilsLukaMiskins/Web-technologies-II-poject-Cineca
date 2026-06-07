@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
         <div class="text-center mt-4 mb-3">
-            <small style="color: rgba(255,255,255,0.5);">Movie data provided by</small><br>
+            <small style="color: rgba(255,255,255,0.5);">{{ __('messages.provided_by') }}</small><br>
             <img src="{{ asset('images/tmdb_logo.svg') }}" alt="TMDB" style="height: 20px; margin-top: 5px;">
         </div>
     {{-- Search bar --}}
@@ -61,8 +61,9 @@
                         <p class="card-text">
                             <small>⭐ {{ number_format($movie['vote_average'], 1) }}</small>
                         </p>
+                        
                         <a href="{{ route('movies.show', $movie['id']) }}"
-                        class="btn btn-primary btn-sm">View</a>
+class="btn btn-primary btn-sm">{{ __('messages.view') }}</a>
                     </div>
                 </div>
             </div>
@@ -75,9 +76,8 @@
             <h1 style="color:#F0F465;">{{ __('messages.welcome') }}</h1>
             <p class="lead">Your personal movie tracker</p>
             <a href="{{ route('register') }}" class="btn btn-primary btn-lg me-2">
-                Get Started
-            </a>
-            <a href="{{ route('login') }}" class="btn btn-outline-light btn-lg">
+    {{ __('messages.get_started') }}
+</a>            <a href="{{ route('login') }}" class="btn btn-outline-light btn-lg">
                 Login
             </a>
         </div>
