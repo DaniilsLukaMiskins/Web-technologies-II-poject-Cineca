@@ -13,7 +13,7 @@ return [
     'recently_reviewed' => 'Nesen novērtēts',
     'movies' => 'Filmas',
     'admin' => 'Administrators',
-    'welcome' => 'Laipni lūdzam CineCA',
+    'welcome' => 'Laipni lūdzam Cineca',
     'no_reviews' => 'Jūs vēl neesat pārskatījis nevienu filmu.',
     'browse_movies' => 'Pārlūkot filmas',
     'my_profile' => 'Mans profils',

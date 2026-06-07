@@ -13,7 +13,7 @@ return [
     'recently_reviewed' => 'Recently reviewed',
     'movies' => 'Movies',
     'admin' => 'Admin',
-    'welcome' => 'Welcome to CineCA',
+    'welcome' => 'Welcome to Cineca',
     'no_reviews' => 'You haven\'t reviewed any movies yet.',
     'browse_movies' => 'Browse Movies',
     'my_profile' => 'My Profile',
