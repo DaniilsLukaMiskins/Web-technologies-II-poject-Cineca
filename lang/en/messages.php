@@ -63,6 +63,10 @@ return [
     'average_grade' => 'Average grade',
     'favourite_genre' => 'Favourite genre',
     'genres' => 'Genres',
-'release_date' => 'Release date',
-
+    'release_date' => 'Release date',
+    'added_to_watchlist' => 'Added to watchlist!',
+    'removed_from_watchlist' => 'Removed from watchlist!',
+    'watchlist_updated' => 'Watchlist updated!',
+    'edit_review' => 'Edit Review',
+    'save_changes' => 'Save Changes',
 ];

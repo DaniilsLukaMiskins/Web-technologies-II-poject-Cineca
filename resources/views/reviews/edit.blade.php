@@ -6,7 +6,7 @@
         <div class="card shadow-lg">
             <div class="card-body p-5">
                 <h1 class="mb-4 fw-bold" style="color:#F0F465;">
-                    Edit Review
+                    {{ __('messages.edit_review') }}
                 </h1>
                 <h5 class="mb-4">{{ $review->movie->title }}</h5>
 
@@ -15,7 +15,7 @@
                     @method('PUT')
 
                     <div class="mb-3">
-                        <label class="form-label">Grade (1-10)</label>
+                        <label class="form-label">{{ __('messages.grade') }}</label>
                         <input type="number" name="grade" class="form-control"
                                min="1" max="10" value="{{ $review->grade }}" required>
                         @error('grade')
@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <label class="form-label">Review Text</label>
+                        <label class="form-label">{{ __('messages.review_text') }}</label>
                         <textarea name="text" class="form-control"
                                   rows="5">{{ $review->text }}</textarea>
                         @error('text')
@@ -33,11 +33,11 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100 py-2">
-                        Save Changes
+                        {{ __('messages.save_changes') }}
                     </button>
                     <a href="{{ route('movies.show', $review->movie->tmdb_movie_id) }}"
                        class="btn btn-outline-light w-100 mt-2">
-                        Cancel
+                        {{ __('messages.cancel') }}
                     </a>
                 </form>
             </div>

@@ -44,7 +44,7 @@ class WatchlistController extends Controller
             'created_at'  => now(),
         ]);
 
-        return redirect()->back()->with('success', 'Added to watchlist!');
+        return redirect()->back()->with('success', __('messages.added_to_watchlist'));
     }
 
     public function update(Request $request, Watchlist $watchlist)

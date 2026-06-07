@@ -64,4 +64,9 @@ return [
     'favourite_genre' => 'Mīļākais žanrs',
     'genres' => 'Žanri',
     'release_date' => 'Iznākšanas datums',
+    'added_to_watchlist' => 'Pievienots skatīšanās sarakstam!',
+    'removed_from_watchlist' => 'Noņemts no skatīšanās saraksta!',
+    'watchlist_updated' => 'Skatīšanās saraksts atjaunināts!',
+    'edit_review' => 'Rediģēt atsauksmi',
+    'save_changes' => 'Saglabāt izmaiņas',
 ];
