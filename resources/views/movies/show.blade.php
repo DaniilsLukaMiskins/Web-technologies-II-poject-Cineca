@@ -35,30 +35,30 @@
                 @endphp
 
                 @if($inWatchlist)
-                    <button class="btn btn-success" disabled>✓ In Watchlist</button>
+                    <button class="btn btn-success" disabled>✓ {{ __('messages.watchlist') }}</button>
                 @else
                     <form action="{{ route('watchlist.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="movie_id" value="{{ $movie->id }}">
                         <input type="hidden" name="status" value="want_to_watch">
-                        <button class="btn btn-primary">+ Watchlist</button>
+                        <button class="btn btn-primary">+ {{ __('messages.watchlist') }}</button>
                     </form>
                 @endif
 
                 <a href="{{ route('reviews.create', $movieData['id']) }}"
                 class="btn"
                 style="background-color:#9CEC5B; color:#000; font-weight:bold;">
-                    Write Review
+                    {{ __('messages.write_review') }}
                 </a>
             </div>
             @endauth
         </div>
     </div>
 
-    <h2 class="mt-4" style="color:#F0F465;">Reviews</h2>
+    <h2 class="mt-4" style="color:#F0F465;">{{ __('messages.reviews') }}</h2>
 
     @if($reviews->isEmpty())
-        <p>No reviews yet. Be the first!</p>
+        <p>{{ __('messages.no_reviews') }}</p>
     @endif
 
     @foreach($reviews as $review)
@@ -75,14 +75,14 @@
             @auth
                 @if(auth()->user()->id === $review->user_id || auth()->user()->isModerator())
                 <a href="{{ route('reviews.edit', $review) }}"
-                   class="btn btn-sm btn-outline-light">Edit</a>
+                   class="btn btn-sm btn-outline-light">{{ __('messages.edit') }}</a>
                 @endif
                 @can('delete', $review)
                 <form action="{{ route('reviews.destroy', $review) }}"
                       method="POST" class="d-inline">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-sm btn-danger">Delete</button>
+                    <button class="btn btn-sm btn-danger">{{ __('messages.delete') }}</button>
                 </form>
                 @endcan
             @endauth

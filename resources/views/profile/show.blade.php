@@ -2,71 +2,67 @@
 @use('Illuminate\Support\Facades\Storage')
 @section('content')
 <div class="container">
-    <h1 class="mb-4" style="color:#F0F465;">My Profile</h1>
+    <h1 class="mb-4" style="color:#F0F465;">{{ __('messages.my_profile') }}</h1>
 
     <div class="row">
-        {{-- Profile info --}}
         <div class="col-md-4">
             <div class="card mb-4">
-    <div class="card-body text-center">
-        @if(auth()->user()->avatar)
-            <img src="{{ asset('storage/' . auth()->user()->avatar) }}"
-                 class="rounded-circle mb-3"
-                 style="width:100px; height:100px; object-fit:cover;">
-        @else
-            <div class="rounded-circle d-inline-flex align-items-center
-                        justify-content-center mb-3"
-                 style="width:100px; height:100px;
-                        background-color:#6184D8; font-size:2rem;">
-                👤
+                <div class="card-body text-center">
+                    @if(auth()->user()->avatar)
+                        <img src="{{ asset('storage/' . auth()->user()->avatar) }}"
+                             class="rounded-circle mb-3"
+                             style="width:100px; height:100px; object-fit:cover;">
+                    @else
+                        <div class="rounded-circle d-inline-flex align-items-center
+                                    justify-content-center mb-3"
+                             style="width:100px; height:100px;
+                                    background-color:#6184D8; font-size:2rem;">
+                            👤
+                        </div>
+                    @endif
+                    <h4>{{ auth()->user()->username }}</h4>
+                    <p class="text-muted">{{ auth()->user()->email }}</p>
+                    <span class="badge"
+                          style="background-color:#F0F465; color:#000; font-size:0.9rem;">
+                        {{ auth()->user()->role->name }}
+                    </span>
+
+                    <form action="{{ route('profile.avatar') }}" method="POST"
+                          enctype="multipart/form-data" class="mt-3">
+                        @csrf
+                        <input type="file" name="avatar" class="form-control mb-2" accept="image/*">
+                        @error('avatar')
+                            <small class="text-warning">{{ $message }}</small>
+                        @enderror
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            {{ __('messages.upload_avatar') }}
+                        </button>
+                    </form>
+                </div>
             </div>
-        @endif
-        <h4>{{ auth()->user()->username }}</h4>
-        <p class="text-muted">{{ auth()->user()->email }}</p>
-        <span class="badge"
-              style="background-color:#F0F465; color:#000; font-size:0.9rem;">
-            {{ auth()->user()->role->name }}
-        </span>
 
-        <form action="{{ route('profile.avatar') }}" method="POST"
-              enctype="multipart/form-data" class="mt-3">
-            @csrf
-            <input type="file" name="avatar" class="form-control mb-2"
-                   accept="image/*">
-            @error('avatar')
-                <small class="text-warning">{{ $message }}</small>
-            @enderror
-            <button type="submit" class="btn btn-primary btn-sm">
-                Upload Avatar
-            </button>
-        </form>
-    </div>
-</div>
-
-            {{-- Statistics --}}
             <div class="card">
                 <div class="card-body">
-                    <h5 style="color:#F0F465;">Statistics</h5>
+                    <h5 style="color:#F0F465;">{{ __('messages.statistics') }}</h5>
                     @if($stats)
-                    <p>Reviews: <strong>{{ $stats->amount_of_reviews }}</strong></p>
-                    <p>Average grade: ⭐ <strong>{{ number_format($stats->average_grade, 1) }}</strong></p>
-                    <p>Favourite genre: <strong>{{ $stats->favourite_genre ?? 'N/A' }}</strong></p>
+                        <p>{{ __('messages.reviews') }}: <strong>{{ $stats->amount_of_reviews }}</strong></p>
+                        <p>Average grade: ⭐ <strong>{{ number_format($stats->average_grade, 1) }}</strong></p>
+                        <p>Favourite genre: <strong>{{ $stats->favourite_genre ?? 'N/A' }}</strong></p>
                     @else
-                    <p>No statistics yet. Start reviewing movies!</p>
+                        <p>{{ __('messages.no_statistics') }}</p>
                     @endif
                 </div>
             </div>
         </div>
 
-        {{-- Recent reviews --}}
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <h5 style="color:#F0F465;">My Recent Reviews</h5>
+                    <h5 style="color:#F0F465;">{{ __('messages.reviews') }}</h5>
                     @if(auth()->user()->reviews->isEmpty())
-                        <p>You haven't reviewed any movies yet.</p>
+                        <p>{{ __('messages.no_reviews') }}</p>
                         <a href="{{ route('movies.index') }}" class="btn btn-primary btn-sm">
-                            Browse Movies
+                            {{ __('messages.browse_movies') }}
                         </a>
                     @endif
                     @foreach(auth()->user()->reviews()->with('movie')->latest()->take(5)->get() as $review)
@@ -77,8 +73,7 @@
                                    class="text-light">
                                     {{ $review->movie->title }}
                                 </a>
-                                <span class="badge"
-                                      style="background-color:#F0F465; color:#000;">
+                                <span class="badge" style="background-color:#F0F465; color:#000;">
                                     {{ $review->grade }}/10
                                 </span>
                             </div>
