@@ -48,19 +48,19 @@ class WatchlistController extends Controller
     }
 
     public function update(Request $request, Watchlist $watchlist)
-    {
-        $request->validate([
-            'status' => 'required|in:want_to_watch,watching,watched',
-        ]);
+{
+    $request->validate([
+        'status' => 'required|in:want_to_watch,watching,watched',
+    ]);
 
-        $watchlist->update(['status' => $request->status]);
+    $watchlist->update(['status' => $request->status]);
 
-        return redirect()->back()->with('success', 'Watchlist updated!');
-    }
+    return redirect()->back()->with('success', __('messages.watchlist_updated'));
+}
 
-    public function destroy(Watchlist $watchlist)
-    {
-        $watchlist->delete();
-        return redirect()->back()->with('success', 'Removed from watchlist!');
-    }
+public function destroy(Watchlist $watchlist)
+{
+    $watchlist->delete();
+    return redirect()->back()->with('success', __('messages.removed_from_watchlist'));
+}
 }

@@ -23,7 +23,7 @@ class AdminController extends Controller
 
         $user->update(['role_id' => $request->role_id]);
 
-        return redirect()->back()->with('success', 'Role updated!');
+        return redirect()->back()->with('success', ->with('success', __('messages.role_updated')));
     }
 
     public function log()

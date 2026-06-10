@@ -52,7 +52,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'Wrong email or password.',
+            'email' => __('messages.wrong_credentials'),
         ]);
     }
 

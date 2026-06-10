@@ -59,7 +59,7 @@ class ReviewController extends Controller
 
     if ($existing) {
     return redirect()->route('movies.show', $request->tmdb_id)
-        ->with('error', 'You have already reviewed this movie!');
+        ->with('error', __('messages.already_reviewed'));
 }
         $review = Review::create([
             'user_id'  => Auth::id(),
@@ -80,7 +80,7 @@ class ReviewController extends Controller
         $this->updateUserStats(Auth::id());
 
         return redirect()->route('movies.show', $request->tmdb_id)
-            ->with('success', 'Review added!');
+            ->with('success', __('messages.review_added'));
     }
 
     public function edit(Review $review)
@@ -113,7 +113,7 @@ class ReviewController extends Controller
         ]);
 
         return redirect()->route('movies.show', $review->movie->tmdb_movie_id)
-            ->with('success', 'Review updated!');
+    ->with('success', __('messages.review_updated'));
     }
 
     public function destroy(Review $review)
@@ -137,6 +137,6 @@ class ReviewController extends Controller
         // Update statistics after deletion
         $this->updateUserStats($userId);
 
-        return redirect()->back()->with('success', 'Review deleted!');
+        return redirect()->back()->with('success', __('messages.review_deleted'));
     }
 }

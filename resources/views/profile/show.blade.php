@@ -47,7 +47,7 @@
                     @if($stats)
                       <p>{{ __('messages.amount_of_reviews') }}: <strong>{{ $stats->amount_of_reviews }}</strong></p>
                       <p>{{ __('messages.average_grade') }}: ⭐ <strong>{{ number_format($stats->average_grade, 1) }}</strong></p>
-                      <p>{{ __('messages.favourite_genre') }}: <strong>{{ $stats->favourite_genre ?? 'N/A' }}</strong></p>
+                      <p>{{ __('messages.favourite_genre') }}: <strong>{{ $stats->favourite_genre ?? __('messages.not_available') }}</strong></p>
                     @else
                         <p>{{ __('messages.no_statistics') }}</p>
                     @endif

@@ -34,7 +34,7 @@
     <h2 class="mt-4 mb-3" style="color:#F0F465;">{{ __('messages.my_friends') }}</h2>
 
     @if($friends->isEmpty())
-        <p>You have no friends yet.</p>
+        <p>{{ __('messages.no_friends') }}</p>
     @endif
 
     @foreach($friends as $friend)

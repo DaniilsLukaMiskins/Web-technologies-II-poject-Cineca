@@ -34,7 +34,7 @@ class FriendController extends Controller
         $friend = User::where('username', $request->username)->first();
 
         if ($friend->id === Auth::id()) {
-            return redirect()->back()->with('error', 'You cannot add yourself!');
+            return redirect()->back()->with('error', __('messages.cannot_add_yourself'));
         }
 
         // check if it is already a friend
@@ -48,7 +48,7 @@ class FriendController extends Controller
 
         if ($existing) {
             if ($existing->status === 'accepted') {
-                return redirect()->back()->with('error', 'This user is already your friend!');
+                return redirect()->back()->with('error', __('messages.already_friends'));
             }
             if ($existing->status === 'pending') {
                 return redirect()->back()->with('error', 'Friend request already sent!');
@@ -69,7 +69,7 @@ class FriendController extends Controller
             'created_at'  => now(),
         ]);
 
-        return redirect()->back()->with('success', 'Friend request sent!');
+        return redirect()->back()->with('success', __('messages.friend_request_sent'));
     }
 
     public function update(Request $request, Friend $friend)
@@ -96,7 +96,7 @@ class FriendController extends Controller
             'created_at'  => now(),
         ]);
 
-        return redirect()->back()->with('success', 'Friend request updated!');
+        return redirect()->back()->with('success', __('messages.friend_request_updated'));
     }
 
     public function destroy(Friend $friend)
@@ -118,6 +118,6 @@ class FriendController extends Controller
                 ->where('friend_id', $friend->user_id);
         })->delete();
 
-        return redirect()->back()->with('success', 'Friend removed!');
+        return redirect()->back()->with('success', __('messages.friend_removed'));
     }
 }

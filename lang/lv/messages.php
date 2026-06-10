@@ -69,4 +69,22 @@ return [
     'watchlist_updated' => 'Skatīšanās saraksts atjaunināts!',
     'edit_review' => 'Rediģēt atsauksmi',
     'save_changes' => 'Saglabāt izmaiņas',
+    'review_added' => 'Atsauksme pievienota!',
+    'already_reviewed' => 'Jūs jau esat pārskatījis šo filmu!',
+    'review_updated' => 'Atsauksme atjaunināta!',
+    'review_deleted' => 'Atsauksme dzēsta!',
+    'friend_request_sent' => 'Draudzības pieprasījums nosūtīts!',
+    'friend_request_updated' => 'Draudzības pieprasījums atjaunināts!',
+    'friend_removed' => 'Draugs noņemts!',
+    'cannot_add_yourself' => 'Jūs nevarat pievienot sevi!',
+    'already_friends' => 'Šis lietotājs jau ir jūsu draugs!',
+    'request_already_sent' => 'Draudzības pieprasījums jau nosūtīts!',
+    'no_friends' => 'Jums vēl nav draugu.',
+    'not_available' => 'Nav pieejams',
+    'avatar_updated' => 'Avatārs atjaunināts!',
+    'wrong_credentials' => 'Nepareizs e-pasts vai parole.',
+    'role_updated' => 'Loma atjaunināta!',
+    'no_access' => 'Jums nav piekļuves šai lapai.',
+
+
 ];

@@ -38,7 +38,7 @@ class ProfileController extends Controller
             'created_at'  => now(),
         ]);
 
-        return redirect()->back()->with('success', 'Avatar updated!');
+        return redirect()->back()->with('success', __('messages.avatar_updated'));
     }
 
     public function reviews()
