@@ -85,6 +85,7 @@ return [
     'wrong_credentials' => 'Nepareizs e-pasts vai parole.',
     'role_updated' => 'Loma atjaunināta!',
     'no_access' => 'Jums nav piekļuves šai lapai.',
+    
 
 
 ];

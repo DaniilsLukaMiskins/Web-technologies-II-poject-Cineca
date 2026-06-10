@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    <h1 class="visually-hidden">CineCA</h1>
         <div class="text-center mt-4 mb-3">
             <small style="color: rgba(255,255,255,0.5);">{{ __('messages.provided_by') }}</small><br>
             <img src="{{ asset('images/tmdb_logo.svg') }}" alt="TMDB" style="height: 20px; margin-top: 5px;">
@@ -58,7 +59,7 @@
     style="height:300px; object-fit:cover;">
                     @endif
                     <div class="card-body">
-                        <h6 class="card-title">{{ $movie['title'] }}</h6>
+                        <h3 class="card-title" style="font-size:1rem;">{{ $movie['title'] }}</h3>
                         <p class="card-text">
                             <small>⭐ {{ number_format($movie['vote_average'], 1) }}</small>
                         </p>

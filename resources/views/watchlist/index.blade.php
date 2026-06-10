@@ -24,7 +24,7 @@
      style="height:300px; object-fit:cover;">
                 @endif
                 <div class="card-body">
-                    <h5 class="card-title" style="min-height:48px; overflow:hidden;">{{ $item->movie->title }}</h5>
+                    <h2 class="card-title" style="font-size:1rem; min-height:48px; overflow:hidden;">{{ $item->movie->title }}</h2>
 
                     <form action="{{ route('watchlist.update', $item) }}" method="POST" class="mb-2">
                         @csrf

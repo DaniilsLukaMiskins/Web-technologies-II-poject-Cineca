@@ -5,7 +5,7 @@
     <div class="col-md-5">
         <div class="card shadow-lg">
             <div class="card-body p-5">
-                <h2 class="text-center mb-4 fw-bold" style="color:#F0F465;">{{ __('messages.register_title') }}</h2>
+               <h1 class="visually-hidden">CineCA - Register</h1>
                 <form action="{{ route('register') }}" method="POST">
                     @csrf
                     <div class="mb-3">

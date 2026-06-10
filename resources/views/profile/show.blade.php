@@ -10,8 +10,9 @@
                 <div class="card-body text-center">
                     @if(auth()->user()->avatar)
                         <img src="{{ asset('storage/' . auth()->user()->avatar) }}"
-                             class="rounded-circle mb-3"
-                             style="width:100px; height:100px; object-fit:cover;">
+     class="rounded-circle mb-3"
+     alt="{{ auth()->user()->username }}"
+     style="width:100px; height:100px; object-fit:cover;">
                     @else
                         <div class="rounded-circle d-inline-flex align-items-center
                                     justify-content-center mb-3"
@@ -20,7 +21,7 @@
                             👤
                         </div>
                     @endif
-                    <h4>{{ auth()->user()->username }}</h4>
+                    <h2>{{ auth()->user()->username }}</h2>
                     <p class="text-muted">{{ auth()->user()->email }}</p>
                     <span class="badge"
                           style="background-color:#F0F465; color:#000; font-size:0.9rem;">
@@ -43,7 +44,7 @@
 
             <div class="card">
                 <div class="card-body">
-                    <h5 style="color:#F0F465;">{{ __('messages.statistics') }}</h5>
+                    <h3 style="color:#F0F465;">{{ __('messages.statistics') }}</h3>
                     @if($stats)
                       <p>{{ __('messages.amount_of_reviews') }}: <strong>{{ $stats->amount_of_reviews }}</strong></p>
                       <p>{{ __('messages.average_grade') }}: ⭐ <strong>{{ number_format($stats->average_grade, 1) }}</strong></p>
@@ -58,7 +59,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <h5 style="color:#F0F465;">{{ __('messages.reviews') }}</h5>
+                    <h3 style="color:#F0F465;">{{ __('messages.reviews') }}</h3>
                     @if(auth()->user()->reviews->isEmpty())
                         <p>{{ __('messages.no_reviews') }}</p>
                         <a href="{{ route('movies.index') }}" class="btn btn-primary btn-sm">

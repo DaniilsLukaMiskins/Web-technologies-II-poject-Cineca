@@ -85,4 +85,5 @@ return [
     'wrong_credentials' => 'Wrong email or password.',
     'role_updated' => 'Role updated!',
     'no_access' => 'You do not have access to this page.',
+    
 ];
