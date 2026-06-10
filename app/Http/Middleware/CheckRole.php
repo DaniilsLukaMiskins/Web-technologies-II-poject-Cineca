@@ -14,7 +14,7 @@ class CheckRole
         }
 
         if (!in_array(auth()->user()->role->name, $roles)) {
-            return redirect('/')->with('error', return redirect('/')->with('error', __('messages.no_access')););
+            return redirect('/')->with('error', __('messages.no_access'));
         }
 
         return $next($request);
