@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cineca</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <style>
         body {
             background-color: #533A71;
@@ -20,19 +20,19 @@
         }
         .btn-primary {
             background-color: #50C5B7;
-            border-color: #50C5B7;
+            border-color: #3a9189;
             color: #000;
             font-weight: bold;
         }
         .btn-primary:hover {
             background-color: #9CEC5B;
-            border-color: #9CEC5B;
+            border-color: #74b343;
             color: #000;
         }
         .btn-outline-light:hover {
             background-color: #F0F465;
             color: #000;
-            border-color: #F0F465;
+            border-color: #b8bc4c;
         }
         .card {
             background-color: #6184D8 !important;
