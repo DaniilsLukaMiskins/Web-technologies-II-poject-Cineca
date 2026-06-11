@@ -36,7 +36,7 @@
                         <td>
                             <form action="{{ route('admin.changeRole', $user) }}"
                                   method="POST" class="d-flex gap-2">
-                                @csrf
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <select name="role_id"
                                         class="form-select form-select-sm"
                                         style="background-color:#533A71; color:white;

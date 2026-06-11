@@ -27,7 +27,7 @@
                     <h2 class="card-title" style="font-size:1rem; min-height:48px; overflow:hidden;">{{ $item->movie->title }}</h2>
 
                     <form action="{{ route('watchlist.update', $item) }}" method="POST" class="mb-2">
-                        @csrf
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         @method('PUT')
                         <select name="status" class="form-select bg-dark text-light border-secondary mb-2"
                                 onchange="this.form.submit()">
@@ -48,7 +48,7 @@
                            class="btn btn-sm btn-outline-light">{{ __('messages.view') }}</a>
 
                         <form action="{{ route('watchlist.destroy', $item) }}" method="POST">
-                            @csrf
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             @method('DELETE')
                             <button class="btn btn-sm btn-danger">{{ __('messages.remove') }}</button>
                         </form>

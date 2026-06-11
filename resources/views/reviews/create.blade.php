@@ -11,7 +11,7 @@
                 <h5 class="mb-4">{{ $movie->title }}</h5>
 
                 <form action="{{ route('reviews.store') }}" method="POST">
-                    @csrf
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="movie_id" value="{{ $movie->id }}">
                     <input type="hidden" name="tmdb_id" value="{{ $movie->tmdb_movie_id }}">
 

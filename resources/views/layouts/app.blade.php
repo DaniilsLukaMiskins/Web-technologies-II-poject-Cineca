@@ -86,7 +86,7 @@
                 {{ auth()->user()->username }}
             </a>
             <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                @csrf
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <button class="btn btn-sm"
                         style="background-color:#50C5B7; color:#000; font-weight:bold;">{{ __('messages.logout') }}
                 </button>
