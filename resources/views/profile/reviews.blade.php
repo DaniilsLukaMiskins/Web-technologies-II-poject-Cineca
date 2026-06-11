@@ -34,7 +34,7 @@
                             <a href="{{ route('reviews.edit', $review) }}"
                                class="btn btn-sm btn-outline-light">{{ __('messages.edit') }}</a>
                             <form action="{{ route('reviews.destroy', $review) }}" method="POST">
-                                @csrf
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 @method('DELETE')
                                 <button class="btn btn-sm btn-danger">{{ __('messages.delete') }}</button>
                             </form>
