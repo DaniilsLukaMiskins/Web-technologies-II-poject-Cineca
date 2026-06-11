@@ -85,6 +85,7 @@
             <a href="/profile" class="btn btn-outline-light btn-sm">
                 {{ auth()->user()->username }}
             </a>
+            
             <form action="{{ route('logout') }}" method="POST" class="d-inline">
                 @csrf
                 <button class="btn btn-sm"
