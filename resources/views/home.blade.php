@@ -55,8 +55,8 @@
                 <div class="card h-100">
                     @if($movie['poster_path'])
                     <img src="https://image.tmdb.org/t/p/w300{{ $movie['poster_path'] }}"
-    class="card-img-top" alt="{{ $movie['title'] }}"
-    style="height:300px; object-fit:cover;">
+                        class="card-img-top" alt="{{ $movie['title'] }}"
+                        style="height:300px; object-fit:cover;">
                     @endif
                     <div class="card-body">
                         <h3 class="card-title" style="font-size:1rem;">{{ $movie['title'] }}</h3>
@@ -65,7 +65,7 @@
                         </p>
                         
                         <a href="{{ route('movies.show', $movie['id']) }}"
-class="btn btn-primary btn-sm">{{ __('messages.view') }}</a>
+                            class="btn btn-primary btn-sm">{{ __('messages.view') }}</a>
                     </div>
                 </div>
             </div>
