@@ -7,7 +7,7 @@
             <div class="card-body p-5">
                <h1 class="visually-hidden">CineCA - Register</h1>
                 <form action="{{ route('register') }}" method="POST">
-                    @csrf
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="mb-3">
                         <label class="form-label">{{ __('messages.username') }}</label>
                         <input type="text" name="username" class="form-control"

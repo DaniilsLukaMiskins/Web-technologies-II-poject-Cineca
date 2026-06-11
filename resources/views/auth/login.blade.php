@@ -8,7 +8,7 @@
                 <h1 class="visually-hidden">Cineca - Login</h1>
                 <h2 class="text-center mb-4 fw-bold" style="color:#F0F465;">{{ __('messages.login_title') }}</h2>
                 <form action="{{ route('login') }}" method="POST">
-                    @csrf
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="mb-3">
                         <label class="form-label">{{ __('messages.email') }}</label>
                         <input type="email" name="email" class="form-control"

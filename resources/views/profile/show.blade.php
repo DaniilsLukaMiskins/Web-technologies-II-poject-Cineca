@@ -30,7 +30,7 @@
 
                     <form action="{{ route('profile.avatar') }}" method="POST"
                           enctype="multipart/form-data" class="mt-3">
-                        @csrf
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="file" name="avatar" class="form-control mb-2" accept="image/*">
                         @error('avatar')
                             <small class="text-warning">{{ $message }}</small>

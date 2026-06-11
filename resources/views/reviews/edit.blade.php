@@ -11,7 +11,7 @@
                 <h5 class="mb-4">{{ $review->movie->title }}</h5>
 
                 <form action="{{ route('reviews.update', $review) }}" method="POST">
-                    @csrf
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     @method('PUT')
 
                     <div class="mb-3">

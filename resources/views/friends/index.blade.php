@@ -12,7 +12,7 @@
             <span>{{ $request->user->username }} wants to be your friend</span>
             <div class="d-flex gap-2">
                 <form action="{{ route('friends.update', $request) }}" method="POST">
-                    @csrf
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     @method('PUT')
                     <input type="hidden" name="status" value="accepted">
                     <button class="btn btn-sm" style="background-color:#9CEC5B; color:#000; font-weight:bold;">
@@ -20,7 +20,7 @@
                     </button>
                 </form>
                 <form action="{{ route('friends.update', $request) }}" method="POST">
-                    @csrf
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     @method('PUT')
                     <input type="hidden" name="status" value="rejected">
                     <button class="btn btn-sm btn-danger">{{ __('messages.reject') }}</button>
@@ -42,7 +42,7 @@
         <div class="card-body d-flex justify-content-between align-items-center">
             <span>{{ $friend->friend->username }}</span>
             <form action="{{ route('friends.destroy', $friend) }}" method="POST">
-                @csrf
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 @method('DELETE')
                 <button class="btn btn-sm btn-danger">{{ __('messages.remove') }}</button>
             </form>
@@ -54,7 +54,7 @@
     <div class="card">
         <div class="card-body">
             <form action="{{ route('friends.store') }}" method="POST" class="d-flex flex-column gap-2">
-                @csrf
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <div class="d-flex gap-2">
                     <input type="text" name="username" class="form-control"
                         placeholder="{{ __('messages.enter_username') }}"

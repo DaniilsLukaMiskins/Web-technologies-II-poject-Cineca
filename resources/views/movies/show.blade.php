@@ -38,7 +38,7 @@
                     <button class="btn btn-success" disabled>✓ {{ __('messages.watchlist') }}</button>
                 @else
                     <form action="{{ route('watchlist.store') }}" method="POST">
-                        @csrf
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <input type="hidden" name="movie_id" value="{{ $movie->id }}">
                         <input type="hidden" name="status" value="want_to_watch">
                         <button class="btn btn-primary">+ {{ __('messages.watchlist') }}</button>
@@ -80,7 +80,7 @@
                 @can('delete', $review)
                 <form action="{{ route('reviews.destroy', $review) }}"
                       method="POST" class="d-inline">
-                    @csrf
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     @method('DELETE')
                     <button class="btn btn-sm btn-danger">{{ __('messages.delete') }}</button>
                 </form>
