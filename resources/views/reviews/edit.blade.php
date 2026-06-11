@@ -8,7 +8,7 @@
                 <h1 class="mb-4 fw-bold" style="color:#F0F465;">
                     {{ __('messages.edit_review') }}
                 </h1>
-                <h5 class="mb-4">{{ $review->movie->title }}</h5>
+                <h2 class="mb-4">{{ $review->movie->title }}</h2>
 
                 <form action="{{ route('reviews.update', $review) }}" method="POST">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
